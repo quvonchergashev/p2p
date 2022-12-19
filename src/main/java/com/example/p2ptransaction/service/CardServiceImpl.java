@@ -5,6 +5,8 @@ import com.example.p2ptransaction.entity.*;
 import com.example.p2ptransaction.payload.ResponseApi;
 import com.example.p2ptransaction.repositories.CardRepository;
 import com.example.p2ptransaction.service.interfaces.CardService;
+import com.example.p2ptransaction.service.interfaces.EmailSendOTPService;
+import com.example.p2ptransaction.service.interfaces.OTPCardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,8 +24,8 @@ public class CardServiceImpl implements CardService {
     private String urlUzcard;
     @Value("${app.humoConnection}")
     private String urlHumo;
-    private final EmailSendOTPServiceImpl emailSendOTPService;
-    private final OTPCardServiceImpl otpCardService;
+    private final EmailSendOTPService emailSendOTPService;
+    private final OTPCardService otpCardService;
     private final CardRepository cardRepository;
 
     @Override

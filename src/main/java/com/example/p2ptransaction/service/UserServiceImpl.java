@@ -19,14 +19,9 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-
-
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
-
     private final UserRepository userRepository;
-
-
     @Override
     public ResponseApi registerUser(RegisterDto registerDto) {
         boolean existsByPhoneNumber = userRepository.existsByPhoneNumber(registerDto.getPhoneNumber());

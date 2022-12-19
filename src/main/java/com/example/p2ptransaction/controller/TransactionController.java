@@ -4,7 +4,7 @@ import com.example.p2ptransaction.dto.EmailDto;
 import com.example.p2ptransaction.dto.TransactionDto;
 import com.example.p2ptransaction.dto.VerificationCodeDto;
 import com.example.p2ptransaction.payload.ResponseApi;
-import com.example.p2ptransaction.service.TransactionServiceImpl;
+import com.example.p2ptransaction.service.interfaces.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class TransactionController {
-    private final TransactionServiceImpl transactionService;
+    private final TransactionService transactionService;
 
     @GetMapping("/transaction-send-email")
     public ResponseEntity<?> transactionSendEmail(@RequestBody TransactionDto transactionDto) {

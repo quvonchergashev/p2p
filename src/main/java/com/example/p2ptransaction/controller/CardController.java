@@ -3,7 +3,7 @@ package com.example.p2ptransaction.controller;
 import com.example.p2ptransaction.dto.*;
 import com.example.p2ptransaction.entity.Card;
 import com.example.p2ptransaction.payload.ResponseApi;
-import com.example.p2ptransaction.service.CardServiceImpl;
+import com.example.p2ptransaction.service.interfaces.CardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CardController {
 
-    private final CardServiceImpl cardService;
+    private final CardService cardService;
 
     @GetMapping("/find-by-card-number/{cardNumber}")
     public ResponseEntity<?> findByCardNumber(@PathVariable String cardNumber) {

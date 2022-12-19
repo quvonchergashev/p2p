@@ -4,10 +4,9 @@ import com.example.p2ptransaction.dto.*;
 import com.example.p2ptransaction.entity.*;
 import com.example.p2ptransaction.payload.ResponseApi;
 import com.example.p2ptransaction.repositories.TransactionRepository;
-import com.example.p2ptransaction.service.interfaces.TransactionService;
+import com.example.p2ptransaction.service.interfaces.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -25,12 +24,10 @@ public class TransactionServiceImpl implements TransactionService {
     private String urlUzcard;
     @Value("${app.humoConnection}")
     private String urlHumo;
-    private final EmailSendOTPServiceImpl emailSendOTPService;
-    private final OTPTransactionServiceImpl otpTransactionService;
-    private final CardServiceImpl cardService;
-
+    private final EmailSendOTPService emailSendOTPService;
+    private final OTPTransactionService otpTransactionService;
+    private final CardService cardService;
     private final TransactionRepository transactionRepository;
-
     private final EOPSServiceImpl eopsService;
     @Override
     public Map<String, String> checkCard(Long cardId) {

@@ -1,10 +1,12 @@
 package com.example.p2ptransaction.service;
+
 import com.example.p2ptransaction.dto.LoginDto;
 import com.example.p2ptransaction.entity.User;
 import com.example.p2ptransaction.payload.ResponseApi;
 import com.example.p2ptransaction.repositories.UserRepository;
 import com.example.p2ptransaction.security.JwtProvider;
 import com.example.p2ptransaction.service.interfaces.AuthService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -19,15 +21,13 @@ import java.util.Optional;
 
 
 @Service
+@RequiredArgsConstructor
 public class AuthServiceImpl implements UserDetailsService, AuthService {
 
 
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    AuthenticationManager authenticationManager;
-    @Autowired
-    JwtProvider jwtProvider;
+    private final UserRepository userRepository;
+    private final AuthenticationManager authenticationManager;
+    private final JwtProvider jwtProvider;
 
     @Override
     public UserDetails loadUserByUsername(String phoneNumber) throws UsernameNotFoundException {
@@ -36,7 +36,8 @@ public class AuthServiceImpl implements UserDetailsService, AuthService {
             return byUsername.get();
         throw new UsernameNotFoundException("User topilmadi");
     }
-@Override
+
+    @Override
     public ResponseApi login(LoginDto loginDto) {
         try {
             Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -48,7 +49,6 @@ public class AuthServiceImpl implements UserDetailsService, AuthService {
             return new ResponseApi("Parol yoki telefon nomer xato", false);
         }
     }
-
 
 
 }

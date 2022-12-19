@@ -2,8 +2,8 @@ package com.example.p2ptransaction.controller;
 import com.example.p2ptransaction.dto.LoginDto;
 import com.example.p2ptransaction.dto.RegisterDto;
 import com.example.p2ptransaction.payload.ResponseApi;
-import com.example.p2ptransaction.service.AuthServiceImpl;
-import com.example.p2ptransaction.service.UserServiceImpl;
+import com.example.p2ptransaction.service.interfaces.AuthService;
+import com.example.p2ptransaction.service.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,9 +19,9 @@ import java.io.IOException;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final AuthServiceImpl authService;
+    private final AuthService authService;
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
