@@ -20,23 +20,31 @@ public class CardController {
     private final CardService cardService;
 
     @GetMapping("/find-by-card-number/{cardNumber}")
-    public ResponseEntity<?> findByCardNumber(@PathVariable String cardNumber) {
+    public ResponseEntity<?> findByCardNumber(
+            @PathVariable String cardNumber
+    ) {
         FindByIdCardDataDto byCard = cardService.findByCard(cardNumber);
         return ResponseEntity.ok(byCard);
     }
     @GetMapping("/add-card-send-email")
-    public ResponseEntity<?> addCardSendEmail(@RequestBody AddCardDto addCardDto) {
+    public ResponseEntity<?> addCardSendEmail(
+            @RequestBody AddCardDto addCardDto
+    ) {
         EmailDto emailDto = cardService.addCardEmailMessage(addCardDto);
         return ResponseEntity.ok(emailDto);
     }
     @GetMapping("/add-card")
-    public ResponseEntity<?> addCard(@RequestBody VerificationCodeDto verificationCodeDto){
+    public ResponseEntity<?> addCard(
+            @RequestBody VerificationCodeDto verificationCodeDto
+    ){
         ResponseApi responseApi = cardService.addCard(verificationCodeDto);
         if (responseApi.isSuccess()) return ResponseEntity.ok(responseApi);
         return ResponseEntity.status(409).body(responseApi);
     }
     @GetMapping("/find-all-by-client-id/{userId}")
-    public ResponseEntity<?> findAllByClientId(@PathVariable Long userId){
+    public ResponseEntity<?> findAllByClientId(
+            @PathVariable Long userId
+    ){
         List<Card> allByClientId = cardService.findAllByClientId(userId);
         return ResponseEntity.ok(allByClientId);
     }

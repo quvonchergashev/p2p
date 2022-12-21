@@ -17,12 +17,16 @@ public class TransactionController {
     private final TransactionService transactionService;
 
     @GetMapping("/transaction-send-email")
-    public ResponseEntity<?> transactionSendEmail(@RequestBody TransactionDto transactionDto) {
+    public ResponseEntity<?> transactionSendEmail(
+            @RequestBody TransactionDto transactionDto
+    ) {
         EmailDto emailDto = transactionService.transactionEmailMessage(transactionDto);
         return ResponseEntity.ok(emailDto);
     }
     @GetMapping("/transaction")
-    public ResponseEntity<?> transaction(@RequestBody VerificationCodeDto verificationCodeDto){
+    public ResponseEntity<?> transaction(
+            @RequestBody VerificationCodeDto verificationCodeDto
+    ){
         ResponseApi transaction = transactionService.transaction(verificationCodeDto);
         if (transaction.isSuccess()) return ResponseEntity.ok(transaction);
         return ResponseEntity.status(409).body(transaction);

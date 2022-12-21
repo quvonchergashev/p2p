@@ -18,19 +18,20 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @RequestMapping("/auth")
 public class AuthController {
-
     private final AuthService authService;
-
     private final UserService userService;
-
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<?> login(
+            @RequestBody LoginDto loginDto
+    ) {
         ResponseApi login = authService.login(loginDto);
         if (login.isSuccess()) return ResponseEntity.ok(login);
         return ResponseEntity.status(409).body(login);
     }
     @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody RegisterDto registerDto)throws IOException {
+    public ResponseEntity<?> register(
+            @Valid @RequestBody RegisterDto registerDto
+    )throws IOException {
         ResponseApi responseApi = userService.registerUser(registerDto);
         if (responseApi.isSuccess()) return ResponseEntity.ok(responseApi);
         return ResponseEntity.status(409).body(responseApi);
